@@ -15,11 +15,11 @@ app.use(morgan('common'));
 blogPosts.create('My First Blog Post','Hello this is text for my blog', 'Pedro Costa');
 blogPosts.create('My Second Blog Post','Hello this is more text for my blog', 'Joe Smith');
 
-app.get('/blogPosts', (req, res) => {
+app.get('/blog-posts', (req, res) => {
   res.json(blogPosts.get());
 });
 
-app.post('/blogPosts', jsonParser, (req, res) => {
+app.post('/blog-posts', jsonParser, (req, res) => {
   const requiredFields = ['title','content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -39,7 +39,8 @@ app.post('/blogPosts', jsonParser, (req, res) => {
 // item id in updated item object match. if problems with any
 // of that, log error and send back status code 400. otherwise
 // call `ShoppingList.update` with updated item.
-app.put('/blogPosts/:id', jsonParser, (req, res) => {
+
+app.put('/blog-posts/:id', jsonParser, (req, res) => {
   const requiredFields = ['title','content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -56,7 +57,7 @@ app.put('/blogPosts/:id', jsonParser, (req, res) => {
     console.error(message);
     return res.status(400).send(message);
   }
-  console.log(`Updating blogPosts item \`${req.params.id}\``);
+  console.log(`Updating blog-posts item \`${req.params.id}\``);
   blogPosts.update({
     id: req.params.id,
     title: req.body.title,
@@ -68,9 +69,9 @@ app.put('/blogPosts/:id', jsonParser, (req, res) => {
 
 // when DELETE request comes in with an id in path,
 // try to delete that item from ShoppingList.
-app.delete('/blogPosts/:id', (req, res) => {
+app.delete('/blog-posts/:id', (req, res) => {
   ShoppingList.delete(req.params.id);
-  console.log(`Deleted blogPosts item \`${req.params.ID}\``);
+  console.log(`Deleted blog-posts item \`${req.params.ID}\``);
   res.status(204).end();
 });
 
