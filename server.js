@@ -30,7 +30,7 @@ app.post('/blog-posts', jsonParser, (req, res) => {
     }
   }
 
-  const item = .create(req.body.title, req.body.content, req.body.author);
+  const item = blogPosts.create(req.body.title, req.body.content, req.body.author);
   res.status(201).json(item);
 });
 
