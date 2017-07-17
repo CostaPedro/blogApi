@@ -14,5 +14,14 @@
     "express": "^4.12.4",
     "morgan": "^1.7.0",
     "uuid": "^2.0.3"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CostaPedro/blogApi.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CostaPedro/blogApi/issues"
+  },
+  "homepage": "https://github.com/CostaPedro/blogApi#readme"
 }
