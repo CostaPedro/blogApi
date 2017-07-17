@@ -19,17 +19,17 @@ function lorem() {
 
 // seed some posts so initial GET requests will return something
 BlogPosts.create(
-  '10 things -- you won\'t believe #4', lorem(), 'Billy Bob');
+  'My blog number 1', lorem(), 'Batman');
 BlogPosts.create(
-  'Lions and tigers and bears oh my', lorem(), 'Lefty Lil');
+  'My blog number 2', lorem(), 'Superman');
 
 
 
-app.get('/blog-posts', (req, res) => {
-  res.json(blogPosts.get());
+router.get('/', (req, res) => {
+  res.json(BlogPosts.get());
 });
 
-app.post('/blog-posts', jsonParser, (req, res) => {
+router.post('/', jsonParser, (req, res) => {
   const requiredFields = ['title','content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -50,7 +50,7 @@ app.post('/blog-posts', jsonParser, (req, res) => {
 // of that, log error and send back status code 400. otherwise
 // call `blogPosts.update` with updated item.
 
-app.put('/blog-posts/:id', jsonParser, (req, res) => {
+router.put('/:id', jsonParser, (req, res) => {
   const requiredFields = ['title','content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
@@ -79,15 +79,10 @@ app.put('/blog-posts/:id', jsonParser, (req, res) => {
 
 // when DELETE request comes in with an id in path,
 // try to delete that item from blogPosts.
-app.delete('/blog-posts/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
   blogPosts.delete(req.params.id);
   console.log(`Deleted blog-posts item \`${req.params.ID}\``);
   res.status(204).end();
 });
 
-
-app.listen(process.env.PORT || 8080, () => {
-  console.log(`Your app is listening on port ${process.env.PORT || 8080}`);
-});
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status
+module.exports = router;

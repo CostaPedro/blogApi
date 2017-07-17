@@ -1,20 +1,17 @@
 const express = require('express');
+
 const morgan = require('morgan');
 
 const app = express();
 
+const blogApiRouter = require('./blogApiRouter');
 
 app.use(morgan('common'));
 app.use(express.static('public'));
 
-const blogApiRouter = require('./blogApiRouter');
 
 
 
-
-app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html');
-});
 
 
 app.use('/blog-posts', blogApiRouter);
